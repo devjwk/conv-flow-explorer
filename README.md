@@ -1,10 +1,12 @@
 # CPRE 487 Lab Flow Explorer
 
-**See how a convolution output is built, one multiply and accumulation at a time.**
+**Explore how values move through a neural network, one layer and one calculation at a time.**
 
 [한국어 안내](README.ko.md) · Korean / English interface · No npm dependencies
 
-A local, interactive learning tool connecting tensor shapes to the original CPRE 487 lab code. Select an output position and filter, inspect channel slices, and follow the `p → q → m → r → s → c` loops from bias initialization to ReLU. The menu links to Max Pooling, Flatten, Dense, and Softmax pages. A second strip shows the full 13-stage Lab 2 model order.
+A local, interactive learning tool for understanding the flow of data through neural-network layers. It connects each layer's purpose, tensor shapes, small worked examples, step-by-step calculations, and source code. Explore **Convolution, Max Pooling, Flatten, Dense, and Softmax** in Korean or English. The ideas apply beyond one course; the current numerical examples and source excerpts are grounded in an Iowa State CPrE 487/587 CNN lab project.
+
+The site shows how a value is selected, transformed, and passed to the next layer. Its 3D-style diagrams label spatial positions, channels, and vector lengths directly; the controls let you trace selected calculations and inspect the original code. The model-flow strip places these mechanisms in a complete 13-stage CNN sequence.
 
 ![Layer navigation and full model flow](docs/layers-menu-preview.jpg)
 
@@ -12,7 +14,7 @@ A local, interactive learning tool connecting tensor shapes to the original CPRE
 
 ## Quick start
 
-After this repository is published:
+Clone and run the published repository:
 
 ```bash
 git clone https://github.com/devjwk/conv-flow-explorer.git
@@ -32,7 +34,17 @@ This mode also requires **Git**. It clones `devjwk/cpre487lab2` through `cpre487
 
 ## Explore
 
-Each layer page has a short concept and role explanation, original Lab 2 source excerpt, real input/output values, and controls to inspect a selected value. The pages use representative stages: Conv 1, Pool 1, Flatten, Dense 1, and Softmax after Dense 2. The model flow strip shows the repeated convolution and pooling stages; those repeated stages link to the relevant mechanism page. The Convolution page currently traces Conv 1 data.
+Start at the home page, then follow the data path:
+
+| Layer | What you can see and test |
+| --- | --- |
+| Convolution | An input window and channel-wise filter slices become one output value; change the position, filter, seed, or small example values and trace each multiply-accumulate. |
+| Max Pooling | A 2×2 window selects one maximum within each channel, reducing spatial size. |
+| Flatten | A spatial position and channel map to one vector index while the value stays the same. |
+| Dense | Every input contributes a weighted product to one output neuron; follow the running sum and bias. |
+| Softmax | Class scores become normalized outputs; inspect exponentials, the shared denominator, and one selected result. |
+
+Each page pairs a labeled 3D-style diagram and a small **illustrative** numeric example with a step-through calculation and an original Lab 2 source excerpt. The illustrative numbers explain the idea; the detailed layer workspaces use bundled Lab 2 data. The pages use representative stages: Conv 1, Pool 1, Flatten, Dense 1, and Softmax after Dense 2. Repeated stages in the 13-stage model strip link to the relevant mechanism page; the site does not numerically replay every stage.
 
 
 | Mode | What to study |
@@ -100,7 +112,7 @@ node tools/verify_random.cjs
 
 Displayed numbers are rounded; calculation uses original float32 values. Channel partial sums are an explanatory breakdown, accumulated as JavaScript numbers; the final output is computed from the original single float32 accumulator.
 
-This tool reproduces **Lab 2 float32 conv1**. Lab 3–5 source tabs explain connections; they do not simulate FPGA cycles, AXI handshakes, integer inference, or physical board execution. Python startup has been tested on macOS; Windows/Linux runtime validation is not claimed.
+The general teaching goal is to make neural-network layer flow understandable through code-backed experiments. The implemented numerical scope is this CNN's representative layers, including **Lab 2 float32 conv1**; it is not a simulator for every architecture or hidden-layer type. Lab 3–5 source tabs explain connections; they do not simulate FPGA cycles, AXI handshakes, integer inference, or physical board execution. Python startup has been tested on macOS; Windows/Linux runtime validation is not claimed.
 
 ## Project structure
 
