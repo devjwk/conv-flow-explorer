@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "algorithm": "xorshift32-v1",
+  "experiments": [
+    {
+      "seed": 4870,
+      "outputsChecked": 27,
+      "nativeMaxAbsoluteError": 0
+    },
+    {
+      "seed": 4871,
+      "outputsChecked": 27,
+      "nativeMaxAbsoluteError": 0
+    },
+    {
+      "seed": 4294967295,
+      "outputsChecked": 27,
+      "nativeMaxAbsoluteError": 0
+    }
+  ]
+}

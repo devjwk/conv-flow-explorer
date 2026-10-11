@@ -1,0 +1,9 @@
+{
+  "outputsChecked": 115200,
+  "macs": 8640000,
+  "nativeCppMaxAbsoluteError": 0,
+  "tensorFlowMaxAbsoluteError": 2.384185791015625e-7,
+  "tensorFlowMeanAbsoluteError": 1.0346413164244142e-8,
+  "toyAndRelu": "PASS",
+  "status": "PASS"
+}

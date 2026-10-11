@@ -1,0 +1,11 @@
+sources/
+validation/reference
+validation/reference.exe
+validation/lab2_conv1_output.bin
+validation/random-*/
+validation/setup.json
+__pycache__/
+*.pyc
+.DS_Store
+
+validation/*.jpg

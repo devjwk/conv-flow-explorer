@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Conv Explorer · 내 코드로 보는 convolution</title>
+  <meta name="description" content="Lab 2 실제 입력과 weight로 convolution의 6중 반복문을 한 곱씩 따라가는 로컬 학습 도구">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="i18n.js"></script>
+  <script defer src="data.js"></script><script defer src="core.js"></script><script defer src="app.js"></script>
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="#"><span class="brand-icon">⊞</span> CONV FLOW EXPLORER</a><span class="project-label">CPRE 4870 <span>/</span> CODE LAB</span><span class="local-badge"><i></i> 로컬 학습 도구</span><div class="language-switch" role="group" aria-label="Language / 언어"><button type="button" data-language="ko" aria-pressed="true" aria-label="한국어">KO</button><button type="button" data-language="en" aria-pressed="false" aria-label="English">EN</button></div></header>
+  <main>
+    <section class="intro"><div><div class="eyebrow">01 / CONVOLUTION, ONE STEP AT A TIME</div><h1>하나의 출력이 만들어지는 순간.</h1><p>위치를 고르고, 채널을 곱하고, 더합니다. 내 코드의 여섯 반복문을 눈으로 따라가세요.</p></div><div class="mode-switch" role="group" aria-label="데이터 선택"><button id="toy-mode" class="active" aria-pressed="true">작은 예제로 이해</button><button id="real-mode" aria-pressed="false">내 conv1 데이터</button><button id="random-mode" aria-pressed="false">난수 실험</button></div></section>
+    <section id="random-controls" class="random-controls" hidden aria-label="난수 실험 설정"><div><b>같은 seed, 같은 실험.</b><small>입력 0~9 · weight −2~2 · bias −3~3 · C=3 / M=3</small></div><label>Seed <input id="seed" type="number" min="1" max="4294967295" value="4870" aria-label="난수 seed"></label><button id="apply-seed" class="outline">이 seed로 생성</button><button id="shuffle" class="primary">↻ 새 숫자 배정</button><span id="seed-status" aria-live="polite"></span></section>
+    <div class="mode-note" id="mode-note"></div>
+    <section class="tensor-strip" aria-label="텐서 크기 관계"><div><span class="tensor-tag">INPUT</span><strong id="input-shape"></strong><small>H × W × <b class="cyan">C</b> · 입력 채널</small></div><span class="tensor-arrow">×</span><div><span class="tensor-tag">FILTER BANK</span><strong id="weight-shape"></strong><small>R × S × <b class="cyan">C</b> × <b class="violet">M</b> · 필터 묶음</small></div><span class="tensor-arrow">→</span><div><span class="tensor-tag">OUTPUT</span><strong id="output-shape"></strong><small>P × Q × <b class="violet">M</b> · 출력 채널</small></div><div class="tensor-takeaway"><b>C개 채널은 합쳐서 하나로.</b><span>M개 필터는 각각 다른 출력으로.</span></div></section>
+
+    <section class="selection panel"><div class="section-title"><span class="step-badge blue">1</span><div><h2>바깥 반복문 · 어느 출력을 만들까요?</h2><p><code>p, q</code>는 위치를, <code>m</code>은 필터를 선택합니다.</p></div></div><div class="selectors"><label>출력 행 <code>p</code><input id="p" type="number" min="0" value="0"></label><label>출력 열 <code>q</code><input id="q" type="number" min="0" value="0"></label><label>필터 / 출력 채널 <code>m</code><select id="m"></select></label><button id="next-output" class="outline">다음 출력 위치 →</button></div></section>
+
+    <section class="visual-grid">
+      <article class="panel input-panel"><div class="card-head"><div><span class="eyebrow">INPUT WINDOW</span><h2>모든 입력 채널을 함께 봅니다</h2></div><span id="window-size" class="pill"></span></div><div class="channel-tabs" id="channel-tabs" role="group" aria-label="관찰할 입력 채널"></div><div class="input-content"><div class="canvas-box"><canvas id="input-canvas" width="256" height="256" aria-label="입력 이미지와 선택한 필터 창"></canvas><small>선택한 입력 창</small></div><div class="matrix-column"><div class="matrix-label" id="patch-label"></div><div class="matrix-grid" id="patch-grid"></div><small id="input-edit-note"></small></div></div><div id="rgb-preview" hidden><canvas id="rgb-canvas" width="96" height="96" aria-label="실제 RGB 입력 이미지"></canvas><span>실제 image_0 · RGB<br>입력은 [0,1]의 float32</span></div><div class="micro-note">같은 <code>p,q</code>에서 모든 필터가 이 입력 창을 공유합니다.</div></article>
+
+      <article class="panel weight-panel"><div class="card-head"><div><span class="eyebrow">FILTER SLICES</span><h2 id="filter-title">필터 하나 안의 채널별 weight</h2></div><span id="filter-size" class="pill"></span></div><div class="weight-description">아래 조각들은 <b>하나의 필터</b>입니다. 각 조각을 같은 번호의 입력 채널과 곱합니다.</div><div id="weight-slices" class="weight-slices"></div><div class="bias-row"><span>필터의 bias <code id="bias-label"></code></span><input id="bias" type="number" step="any" aria-label="선택한 필터의 bias"></div></article>
+
+      <article class="panel output-panel"><div class="card-head"><div><span class="eyebrow">OUTPUT CHANNEL</span><h2 id="output-title"></h2></div><span class="pill violet-pill">완성된 값 미리보기</span></div><canvas id="output-canvas" width="256" height="256" aria-label="완성된 출력 채널. 클릭하여 출력 위치 선택" tabindex="0"></canvas><small class="canvas-hint">클릭하여 추적할 위치를 선택 · 방향키로 이동</small><div id="selected-output" class="result-card"></div><div class="reference-note" id="reference-note"></div><div class="output-note">아래 계산기는 선택한 출력 <b>하나</b>를 단계별로 추적합니다.</div></article>
+    </section>
+
+    <section class="workbench panel"><div class="section-title"><span class="step-badge orange">2</span><div><h2>안쪽 반복문 · 한 곱씩 누적합니다</h2><p><code>r → s → c</code> 순서. 가장 안쪽의 <code>c</code>가 먼저 바뀝니다.</p></div><span id="loop-position" class="loop-position"></span></div>
+      <div class="playback"><button id="reset" class="outline" aria-label="처음으로">↺ 초기화</button><button id="previous" class="outline">← 이전 곱</button><button id="play" class="primary">▶ 자동 재생</button><button id="next" class="outline">다음 곱 →</button><button id="finish" class="outline">끝까지 계산</button><label class="speed">속도<select id="speed"><option value="900">천천히</option><option value="350" selected>보통</option><option value="80">빠르게</option></select></label></div>
+      <div class="progress-row"><input id="progress" type="range" min="0" value="0" aria-label="누적한 곱 개수"><span id="progress-label"></span></div>
+      <div class="calculation-grid"><div><div id="phase-note" class="phase-note" aria-live="polite"></div><div id="equation" class="equation"></div><div id="accumulator" class="accumulator"></div><div id="channel-sums" class="channel-sums"></div><div class="micro-note">채널별 합은 설명용 분해입니다. 실제 코드는 <code>r,s,c</code> 순서로 하나의 float32 sum에 누적합니다.</div></div><div class="code-panel"><div class="code-top"><span>Lab 2 · computeNaive</span><span id="code-stage"></span></div><pre id="live-code" aria-label="현재 단계의 코드"></pre><div id="address-info" class="address-info"></div></div></div>
+      <details class="trace-details"><summary>계산 기록과 배열 주소 펼치기</summary><div class="table-scroll"><table><thead><tr><th>순서</th><th>r,s,c</th><th>inputIdx</th><th>weightIdx</th><th>input × weight</th><th>누적 sum</th></tr></thead><tbody id="trace-table"></tbody></table></div></details>
+    </section>
+
+    <section class="learning-grid"><article class="panel lesson"><span class="eyebrow">READ THE TENSOR</span><h2>필터의 두께와 출력의 두께</h2><div id="tensor-explanation"></div><details><summary>입력 채널을 따로 출력하지 않는 이유</summary><p>필터 하나가 찾는 특징은 모든 입력 채널의 정보를 함께 사용합니다. c별 곱을 하나의 sum에 더하기 때문에 c 차원은 출력에서 사라집니다. 서로 다른 필터 m의 sum은 각각 저장하므로 m 차원은 출력에 남습니다.</p></details></article><article class="panel lesson"><span class="eyebrow">FOLLOW YOUR LABS</span><h2>이 계산이 다음 Lab에서 어떻게 이어질까?</h2><div class="lab-flow"><span>Lab 1<br><b>TF 입력·weight</b></span><i>→</i><span>Lab 2<br><b>직접 누적</b></span><i>→</i><span>Lab 3<br><b>MAC pipeline</b></span><i>→</i><span>Lab 4–5<br><b>정수·HW MAC</b></span></div><p>현재 화면은 Lab 2의 float32 convolution을 재현합니다. 아래 실제 코드 조각으로 정수 계산과 hardware MAC 호출까지 연결해 읽을 수 있습니다.</p></article></section>
+    <section class="panel sources"><div class="card-head"><div><span class="eyebrow">PROJECT SOURCE</span><h2>내 저장소의 실제 코드</h2></div></div><div id="source-tabs" class="source-tabs" role="group" aria-label="Lab 코드 선택"></div><div id="source-description"></div><div class="source-path" id="source-path"></div><pre id="source-code"></pre></section>
+    <footer>CONV FLOW EXPLORER <span>Stride 1 · padding 없음 · batch 1 · Lab 2 코드의 float32 연산 순서</span><a href="../README.md">사용법 / 데이터 출처</a></footer>
+  </main>
+</body>
+</html>

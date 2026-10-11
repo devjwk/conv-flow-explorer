@@ -1,0 +1,27 @@
+{
+  "input": {
+    "path": "cpre487lab2/data/image_0.bin",
+    "bytes": 49152,
+    "sha256": "2860f3d55b4676309b8dc91b9dddaf9b3733311ce8c07599d4f98063a76b7364"
+  },
+  "weights": {
+    "path": "cpre487lab2/data/model/conv1_weights.bin",
+    "bytes": 9600,
+    "sha256": "6706180db494d22eea8059f61244cc75eede0a10a6a66dc6eeb7c2501d8a2e3d"
+  },
+  "bias": {
+    "path": "cpre487lab2/data/model/conv1_biases.bin",
+    "bytes": 128,
+    "sha256": "8a85ef7bc05ffa3903153a60863e938de253d5bfee625e72f542093c390e3de5"
+  },
+  "reference": {
+    "path": "cpre487lab2/data/image_0_data/layer_0_output.bin",
+    "bytes": 460800,
+    "sha256": "d2411ca2f64ebd1c0302f72495ea586ecc788882e489bd9234d845082d24bdf5"
+  },
+  "cppReference": {
+    "path": "validation/lab2_conv1_output.bin",
+    "bytes": 460800,
+    "sha256": "cbc49c414b58f3d118a8ea30dbe9211c8696e66e4644bae5eb2111b890ca364a"
+  }
+}
