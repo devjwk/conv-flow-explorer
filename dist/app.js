@@ -12,7 +12,16 @@
   function stop(){if(timer){clearInterval(timer);timer=null;} $('play').textContent=tr('▶ 자동 재생','▶ Play');}
   function setSelection(np,nq,nm){stop();p=clamp(np,d.P-1);q=clamp(nq,d.Q-1);m=clamp(nm,d.M-1);step=0;viewC=0;current=core.trace(d,p,q,m);render();}
   function map(){if(!maps.has(m))maps.set(m,core.outputChannel(d,m));return maps.get(m);}
-  function setMode(next){stop();mode=next;d=next==='toy'?core.toy():next==='random'?core.random(seed):actual;maps=new Map();p=q=m=viewC=step=0;current=core.trace(d,p,q,m);render();
+  function informativeFilter(){
+    let selected=0,largest=0;
+    for(let filter=0;filter<d.M;filter++){
+      const channel=core.outputChannel(d,filter);
+      const peak=Math.max(...channel);
+      if(peak>largest){largest=peak;selected=filter;}
+    }
+    return selected;
+  }
+  function setMode(next){stop();mode=next;d=next==='toy'?core.toy():next==='random'?core.random(seed):actual;maps=new Map();p=q=viewC=step=0;m=next==='random'?informativeFilter():0;current=core.trace(d,p,q,m);render();
     const url=new URL(location.href);if(next==='random')url.searchParams.set('seed',seed);else url.searchParams.delete('seed');try{history.replaceState(null,'',url);}catch(_){} }
   function changed(){stop();maps.clear();step=0;current=core.trace(d,p,q,m);render();}
   function editableCell(value,change,active=false){
@@ -74,7 +83,12 @@
     if(mode==='real'){
       const i=(p*d.Q+q)*d.M+m,err=Math.abs(current.output-d.reference[i]);
       $('reference-note').innerHTML=(d.cppReference?tr(`원본 Lab 2 C++: <b>${fmt(d.cppReference[i])}</b><br>`,`Original Lab 2 C++: <b>${fmt(d.cppReference[i])}</b><br>`):'')+tr(`TensorFlow 참조: <b>${fmt(d.reference[i])}</b> · 절대 오차 ${fmt(err)}`,`TensorFlow reference: <b>${fmt(d.reference[i])}</b> · absolute error ${fmt(err)}`);
-    }else{$('reference-note').textContent=tr('이 값은 bias + 모든 곱을 더한 후 ReLU를 적용한 완성값입니다.','Completed value: bias + all products, followed by ReLU.');}
+    }else{
+      const allZero=values.every(value=>value===0);
+      $('reference-note').textContent=allZero
+        ?tr(`이 필터의 출력 ${values.length}개는 모두 0입니다. 선택 위치의 누적합 ${fmt(current.sum)}에 ReLU를 적용해 ${fmt(current.output)}이 됩니다.`,`All ${values.length} outputs of this filter are zero. At the selected position, ReLU turns the raw sum ${fmt(current.sum)} into ${fmt(current.output)}.`)
+        :tr(`선택 위치: 누적합 ${fmt(current.sum)} → ReLU 출력 ${fmt(current.output)}. 다른 필터 m을 선택하면 출력 채널이 바뀝니다.`,`Selected position: raw sum ${fmt(current.sum)} → ReLU output ${fmt(current.output)}. Choose another filter m to see a different output channel.`);
+    }
   }
   function renderCode(){
     const done=step===current.terms.length,stage=step===0?3:done?6:5;

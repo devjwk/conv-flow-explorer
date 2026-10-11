@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CPRE 487 Lab Flow Explorer · Layer</title>
+  <meta name="description" content="실제 Lab 2 코드와 데이터로 CNN 레이어의 계산 흐름을 공부합니다.">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="i18n.js?v=20261011-title"></script><script defer src="navigation.js?v=20261011-home"></script>
+  <script defer src="layer-data.js"></script><script defer src="layers.js?v=20261011-title"></script>
+  <script defer src="diagrams.js?v=20261011-concepts"></script>
+  <script defer src="credit.js?v=20261011-source"></script>
+</head>
+<body data-layer="flatten">
+  <header class="topbar"><a class="brand" href="index.html"><span class="brand-icon">⊞</span> CPRE 487 LAB FLOW EXPLORER</a><span class="project-label">CPRE 4870 <span>/</span> CODE LAB</span><span class="local-badge"><i></i> 로컬 학습 도구</span><div class="language-switch" role="group" aria-label="Language / 언어"><button type="button" data-language="ko" aria-pressed="true" aria-label="한국어">KO</button><button type="button" data-language="en" aria-pressed="false" aria-label="English">EN</button></div></header>
+  <main class="layer-main">
+    <section class="layer-intro"><div class="eyebrow" id="layer-kicker"></div><h1 id="layer-title"></h1><p id="layer-intro-text"></p></section>
+    <section class="layer-route" aria-label="Layer input to output"><div><small>INPUT</small><strong id="layer-input-shape"></strong></div><span>→</span><div><small>OPERATION</small><strong id="layer-operation"></strong></div><span>→</span><div><small>OUTPUT</small><strong id="layer-output-shape"></strong></div></section>
+    <section class="layer-controls"><div><span class="eyebrow" id="selector-kicker"></span><h2 id="selector-title"></h2><p id="selector-description"></p></div><div class="layer-fields" id="layer-fields"></div></section>
+    <section class="layer-workspace"><div class="layer-pane"><span class="eyebrow" id="input-kicker"></span><h2 id="input-title"></h2><div id="input-visual"></div></div><div class="layer-pane"><span class="eyebrow" id="process-kicker"></span><h2 id="process-title"></h2><div id="process-visual"></div></div><div class="layer-pane"><span class="eyebrow" id="output-kicker"></span><h2 id="output-title"></h2><div id="output-visual"></div></div></section>
+    <section class="layer-playback"><div class="section-title"><span class="step-badge orange">2</span><div><h2 id="playback-title"></h2><p id="playback-description"></p></div></div><div class="playback"><button class="outline" id="layer-reset"></button><button class="outline" id="layer-prev"></button><button class="primary" id="layer-play"></button><button class="outline" id="layer-next"></button><button class="outline" id="layer-finish"></button></div><div class="progress-row"><input id="layer-progress" type="range" min="0" value="0"><span id="layer-progress-label"></span></div><div id="layer-stage" aria-live="polite"></div></section>
+    <section class="layer-explanation"><div><span class="eyebrow" id="concept-kicker"></span><h2 id="concept-title"></h2><p id="concept-text"></p></div><div><span class="eyebrow" id="role-kicker"></span><h2 id="role-title"></h2><p id="role-text"></p></div></section>
+    <section class="layer-source"><span class="eyebrow">LAB 2 · ORIGINAL SOURCE</span><h2 id="source-title"></h2><p id="source-note"></p><div id="layer-source-path" class="source-path"></div><pre id="layer-code"></pre></section>
+    <footer>CPRE 487 LAB FLOW EXPLORER <span id="footer-note"></span><a href="../README.md">README / 안내</a></footer>
+  </main>
+</body>
+</html>

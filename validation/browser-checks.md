@@ -33,3 +33,10 @@ No hardware-board verification is included.
 - English completion reached final sum / ReLU 20 in the small example.
 - Static labels, dynamic matrix labels, code source descriptions and accessible labels have translations.
 - Interface preview: docs/preview-en.jpg.
+
+## Random output preview correction
+
+- Seed 4870 filter 0 has nine zero outputs because the raw sum at (0,0) is -28 and ReLU produces 0.
+- The random view now initially selects filter 1, whose 3×3 map is [3,1,6;12,6,13;47,13,22].
+- Selecting filter 0 still shows the true zero map and explains the raw sum / ReLU relationship.
+- Browser checked the filter switch and preview after cache versioning; console errors: none.

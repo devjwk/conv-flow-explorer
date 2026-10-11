@@ -1,0 +1,68 @@
+{
+  "poolInput": {
+    "path": "cpre487lab2/data/image_0_data/layer_1_output.bin",
+    "count": 100352,
+    "bytes": 401408,
+    "sha256": "f7f752c914bea1cdb777041d52ece3b104585d1e4d830f72027d297d633ae581"
+  },
+  "poolOutput": {
+    "path": "cpre487lab2/data/image_0_data/layer_2_output.bin",
+    "count": 25088,
+    "bytes": 100352,
+    "sha256": "fc7df41d4630dd58bb2d30722870121b278d51e4472e1c420e82cb69a786886f"
+  },
+  "flattenInput": {
+    "path": "cpre487lab2/data/image_0_data/layer_8_output.bin",
+    "count": 2048,
+    "bytes": 8192,
+    "sha256": "39196433a0aa49fb638539f687224eb331bd6518df8cbbd2c91a7463d315c59d"
+  },
+  "flattenOutput": {
+    "path": "cpre487lab2/data/image_0_data/layer_9_output.bin",
+    "count": 2048,
+    "bytes": 8192,
+    "sha256": "39196433a0aa49fb638539f687224eb331bd6518df8cbbd2c91a7463d315c59d"
+  },
+  "denseInput": {
+    "path": "cpre487lab2/data/image_0_data/layer_9_output.bin",
+    "count": 2048,
+    "bytes": 8192,
+    "sha256": "39196433a0aa49fb638539f687224eb331bd6518df8cbbd2c91a7463d315c59d"
+  },
+  "denseWeights": {
+    "path": "cpre487lab2/data/model/dense1_weights.bin",
+    "count": 524288,
+    "bytes": 2097152,
+    "sha256": "a13c8c5e4bc4772c0a72cc0f8c5209772f25fa4da8fbf4aebb9c573ca2a72d6c"
+  },
+  "denseBias": {
+    "path": "cpre487lab2/data/model/dense1_biases.bin",
+    "count": 256,
+    "bytes": 1024,
+    "sha256": "abf5364486c11615ffc8e7ef72506454194686e36d487dfd7a18f522a25ed437"
+  },
+  "denseOutput": {
+    "path": "cpre487lab2/data/image_0_data/layer_10_output.bin",
+    "count": 256,
+    "bytes": 1024,
+    "sha256": "9a35880e6cd93b705a0c429a722e9b610f7c264f779c096bf00df130b461ea86"
+  },
+  "dense2Weights": {
+    "path": "cpre487lab2/data/model/dense2_weights.bin",
+    "count": 51200,
+    "bytes": 204800,
+    "sha256": "b797a36a467e79c538ce6a4395330af54a0a3fd531c6d2c30bd6888af4fa4d51"
+  },
+  "dense2Bias": {
+    "path": "cpre487lab2/data/model/dense2_biases.bin",
+    "count": 200,
+    "bytes": 800,
+    "sha256": "460a44114188623d8c3c17ec30905f0ab5324f0375aa01cc1ae5fd9a0d963411"
+  },
+  "softmaxOutput": {
+    "path": "cpre487lab2/data/image_0_data/layer_11_output.bin",
+    "count": 200,
+    "bytes": 800,
+    "sha256": "f9de277b1b2b9374a424fae9d51f75e6b915dea46128345219818386732fc425"
+  }
+}

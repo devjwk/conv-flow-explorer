@@ -1,12 +1,14 @@
-# Conv Flow Explorer
+# CPRE 487 Lab Flow Explorer
 
 **See how a convolution output is built, one multiply and accumulation at a time.**
 
 [한국어 안내](README.ko.md) · Korean / English interface · No npm dependencies
 
-A local, interactive learning tool connecting tensor shapes to the original CPRE 487 lab code. Select an output position and filter, inspect channel slices, and follow the `p → q → m → r → s → c` loops from bias initialization to ReLU.
+A local, interactive learning tool connecting tensor shapes to the original CPRE 487 lab code. Select an output position and filter, inspect channel slices, and follow the `p → q → m → r → s → c` loops from bias initialization to ReLU. The menu links to Max Pooling, Flatten, Dense, and Softmax pages. A second strip shows the full 13-stage Lab 2 model order.
 
-![English interface](docs/preview-en.jpg)
+![Layer navigation and full model flow](docs/layers-menu-preview.jpg)
+
+[English interface preview](docs/preview-en.jpg)
 
 ## Quick start
 
@@ -29,6 +31,9 @@ python3 run.py
 This mode also requires **Git**. It clones `devjwk/cpre487lab2` through `cpre487lab5` into `sources/` and reuses existing checkouts without pulling or resetting. Lab 1 is currently private and is not required to run this tool. An available C++17 compiler is used for an optional native reference; compilation can be skipped with `--no-native`.
 
 ## Explore
+
+Each layer page has a short concept and role explanation, original Lab 2 source excerpt, real input/output values, and controls to inspect a selected value. The pages use representative stages: Conv 1, Pool 1, Flatten, Dense 1, and Softmax after Dense 2. The model flow strip shows the repeated convolution and pooling stages; those repeated stages link to the relevant mechanism page. The Convolution page currently traces Conv 1 data.
+
 
 | Mode | What to study |
 | --- | --- |
@@ -53,9 +58,9 @@ python3 run.py --existing-root ..        # reuse local cpre487lab2..5 checkouts
 python3 run.py --prepare-only            # prepare data without starting a server
 ```
 
-Random generation uses `xorshift32-v1`, with seeds from 1 to 4294967295. The same seed gives the same initial tensors: input 0–9, weights −2–2, bias −3–3. Manual edits are not encoded in the seed; applying it again restores the initial values. Random filters are study examples, not trained models.
+Random generation uses `xorshift32-v1`, with seeds from 1 to 4294967295. The same seed gives the same initial tensors: input 0–9, weights −2–2, bias −3–3. Manual edits are not encoded in the seed; applying it again restores the initial values. The random view starts on the filter with the strongest visible output; other filters remain selectable. A filter whose entire output is zero shows its raw sum and ReLU explanation. Random filters are study examples, not trained models.
 
-The static page can also be opened directly from `dist/index.html`; keep all files in `dist/` together. Browser verification was performed over local HTTP.
+The static home page can also be opened directly from `dist/index.html`; the convolution experiment is at `dist/convolution.html`. Keep all files in `dist/` together. Browser verification was performed over local HTTP.
 
 ## Code and data provenance
 
@@ -77,6 +82,10 @@ The calculation uses `Math.fround` for float32 multiplication and accumulation i
 
 Recorded checks:
 
+- Pool 1: all 25,088 outputs matched the Lab 2 reference exactly; Flatten: all 2,048 values matched exactly.
+- Dense 1: 256 outputs were checked with JavaScript float32 arithmetic; maximum absolute difference from the reference was 2.86102294921875e-6.
+- Softmax after Dense 2: maximum absolute difference across 200 values was 8.937005191445024e-8; computed values summed to about 0.99999993.
+
 - All **115,200** real conv1 outputs matched the native C++ reference exactly.
 - Maximum absolute error against the TensorFlow reference: **2.384185791015625e-7**.
 - All 27 outputs for each seed **4870, 4871, 4294967295** matched native C++ exactly.
@@ -96,7 +105,7 @@ This tool reproduces **Lab 2 float32 conv1**. Lab 3–5 source tabs explain conn
 ## Project structure
 
 ```text
-dist/          Static interface, translations, computation, embedded data
+dist/          Home and five static layer pages, translations, computation, embedded data
 run.py         Standard-library launcher and optional lab preparation
 tools/         Data exporter, original C++ wrapper, numerical checks, ZIP packager
 validation/    Recorded numerical checks and source data manifest

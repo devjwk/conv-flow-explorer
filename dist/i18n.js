@@ -102,7 +102,7 @@
   });
   function apply() {
     document.documentElement.lang = language;
-    document.title = language === 'ko' ? 'Conv Flow Explorer · 코드로 보는 convolution' : 'Conv Flow Explorer · Convolution through code';
+    document.title = language === 'ko' ? 'CPRE 487 Lab Flow Explorer · 코드로 보는 convolution' : 'CPRE 487 Lab Flow Explorer · Convolution through code';
     document.querySelector('meta[name=description]').content = language === 'ko'
       ? '실제 Lab 코드와 함께 convolution의 입력, 필터, 채널, 누적 과정을 따라가는 한영 학습 도구'
       : 'A Korean / English learning tool tracing convolution inputs, filters, channels and accumulation with original lab code.';

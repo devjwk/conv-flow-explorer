@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Clone public devjwk Labs 2–5, prepare Conv Explorer, and start a seeded experiment."""
+"""Clone public devjwk Labs 2–5, prepare CPRE 487 Lab Flow Explorer, and start a seeded experiment."""
 import argparse
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
@@ -89,8 +89,10 @@ def main():
         native=None if args.no_native else native_reference(root)
         from tools.export_data import export
         export(root,native)
-    elif not (APP/'dist/data.js').is_file():
-        raise RuntimeError('Bundled dist/data.js is missing; run without --offline to rebuild it.')
+        from tools.export_layers import export as export_layers
+        export_layers(root)
+    elif not all((APP/'dist'/name).is_file() for name in ('data.js','layer-data.js')):
+        raise RuntimeError('Bundled data is missing; run without --offline to rebuild it.')
     record={'seed':seed,'mode':'offline' if args.offline else 'existing' if args.existing_root else 'clone',
             'repositoryCommits':commits,'randomAlgorithm':'xorshift32-v1','randomShape':{'H':4,'W':4,'C':3,'R':2,'S':2,'M':3}}
     (APP/'validation/setup.json').write_text(json.dumps(record,indent=2)+'\n',encoding='utf-8')
