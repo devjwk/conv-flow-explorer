@@ -2,9 +2,9 @@
 
 **Explore how values move through a neural network, one layer and one calculation at a time.**
 
-[한국어 안내](README.ko.md) · Korean / English interface · No npm dependencies
+[Live site](https://devjwk.github.io/conv-flow-explorer/) · [한국어 안내](README.ko.md) · Korean / English interface · No npm dependencies
 
-A local, interactive learning tool for understanding the flow of data through neural-network layers. It connects each layer's purpose, tensor shapes, small worked examples, step-by-step calculations, and source code. Explore **Convolution, Max Pooling, Flatten, Dense, and Softmax** in Korean or English. The ideas apply beyond one course; the current numerical examples and source excerpts are grounded in an Iowa State CPrE 487/587 CNN lab project.
+An interactive learning tool for understanding the flow of data through neural-network layers. It connects each layer's purpose, tensor shapes, small worked examples, step-by-step calculations, and source code. Explore **Convolution, Max Pooling, Flatten, Dense, and Softmax** in Korean or English. The ideas apply beyond one course; the current numerical examples and source excerpts are grounded in an Iowa State CPrE 487/587 CNN lab project.
 
 The site shows how a value is selected, transformed, and passed to the next layer. Its 3D-style diagrams label spatial positions, channels, and vector lengths directly; the controls let you trace selected calculations and inspect the original code. The model-flow strip places these mechanisms in a complete 13-stage CNN sequence.
 

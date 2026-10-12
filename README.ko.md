@@ -6,12 +6,16 @@ Convolution, Max Pooling, Flatten, Dense, Softmax의 역할과 데이터 흐름�
 
 각 그림에는 공간 위치·채널 수·벡터 길이를 직접 표시했습니다. 사용자는 한 출력값을 선택해 입력에서 다음 레이어의 출력까지 어떤 연산이 일어나는지 실험할 수 있습니다. 다만 현재 구현은 이 CNN의 대표 레이어를 보여주며, 모든 신경망 구조나 모든 은닉층 유형을 실행하는 범용 시뮬레이터는 아닙니다.
 
+[웹에서 바로 실행](https://devjwk.github.io/conv-flow-explorer/) · [English README](README.md)
+
+웹 버전은 설치 없이 브라우저에서 열립니다. 포함된 Lab 데이터와 난수 실험을 사용할 수 있습니다. 원본 Lab 저장소를 새로 복제하거나 검증 데이터를 재생성하려면 아래 로컬 실행 방법을 사용하세요.
+
 ## 다른 컴퓨터에서 한 명령으로 시작
 
 이 폴더 전체를 내려받거나 배포 ZIP을 압축 해제한 후 실행합니다. Python 3.9 이상과 Git이 필요하며 Windows, macOS, Linux용으로 표준 라이브러리만 사용합니다. C++ 컴파일러와 Node는 추가 검증용으로 선택 사항입니다.
 
 ```bash
-cd conv-explorer
+cd conv-flow-explorer
 python3 run.py
 ```
 
@@ -37,7 +41,7 @@ python3 run.py --port 0                   # 사용 가능한 로컬 포트 자�
 python3 run.py --prepare-only             # 준비만 하고 종료
 ```
 
-표준 실행 포트는 8787이며 Ctrl+C로 서버를 종료합니다. 기존 8765 preview와 별도로 동작합니다. `validation/setup.json`에는 seed와 사용한 저장소 commit이 기록됩니다. 이 화면은 방문자의 컴퓨터에서 실험하도록 만든 소프트웨어입니다. 공개 웹 서버 운영이나 다른 컴퓨터에서 localhost로 접속하는 기능은 포함하지 않습니다.
+표준 실행 포트는 8787이며 Ctrl+C로 서버를 종료합니다. 기존 8765 preview와 별도로 동작합니다. `validation/setup.json`에는 seed와 사용한 저장소 commit이 기록됩니다. 웹 버전은 GitHub Pages에서 제공되며, 로컬 실행은 자신의 컴퓨터에서 실험할 때 사용할 수 있습니다.
 
 ## GitHub에서 내려받기
 
@@ -128,7 +132,7 @@ cpre487lab2/data/image_0_data/layer_0_output.bin      60×60×32 TensorFlow refe
 전체 원본 C++ 비교 검증에는 C++17 컴파일러(clang++ 또는 g++)와 Node가 필요합니다.
 
 ```bash
-cd conv-explorer
+cd conv-flow-explorer
 python3 run.py --prepare-only --seed 4870
 node tools/verify.cjs
 node tools/verify_random.cjs

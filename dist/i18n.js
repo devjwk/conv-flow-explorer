@@ -2,7 +2,7 @@
 (() => {
   'use strict';
   const dictionary = {
-  "로컬 학습 도구": "Local learning tool",
+  "인터랙티브 학습 도구": "Interactive learning tool",
   "하나의 출력이 만들어지는 순간.": "Watch one output come to life.",
   "위치를 고르고, 채널을 곱하고, 더합니다. 내 코드의 여섯 반복문을 눈으로 따라가세요.": "Choose a position. Multiply across channels. Accumulate. Follow the six loops in your code.",
   "작은 예제로 이해": "Small example",

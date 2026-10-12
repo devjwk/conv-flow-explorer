@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CPRE 487 Lab Flow Explorer · 내 코드로 보는 convolution</title>
-  <meta name="description" content="Lab 2 실제 입력과 weight로 convolution의 6중 반복문을 한 곱씩 따라가는 로컬 학습 도구">
+  <meta name="description" content="Lab 2 실제 입력과 weight로 convolution의 6중 반복문을 한 곱씩 따라가는 인터랙티브 학습 도구">
   <link rel="stylesheet" href="style.css">
   <script defer src="i18n.js?v=20261011-title"></script>
   <script defer src="navigation.js?v=20261011-home"></script>
@@ -12,7 +12,7 @@
   <script defer src="credit.js?v=20261011-source"></script>
 </head>
 <body>
-  <header class="topbar"><a class="brand" href="index.html"><span class="brand-icon">⊞</span> CPRE 487 LAB FLOW EXPLORER</a><span class="project-label">CPRE 4870 <span>/</span> CODE LAB</span><span class="local-badge"><i></i> 로컬 학습 도구</span><div class="language-switch" role="group" aria-label="Language / 언어"><button type="button" data-language="ko" aria-pressed="true" aria-label="한국어">KO</button><button type="button" data-language="en" aria-pressed="false" aria-label="English">EN</button></div></header>
+  <header class="topbar"><a class="brand" href="index.html"><span class="brand-icon">⊞</span> CPRE 487 LAB FLOW EXPLORER</a><span class="project-label">CPRE 4870 <span>/</span> CODE LAB</span><span class="local-badge"><i></i> 인터랙티브 학습 도구</span><div class="language-switch" role="group" aria-label="Language / 언어"><button type="button" data-language="ko" aria-pressed="true" aria-label="한국어">KO</button><button type="button" data-language="en" aria-pressed="false" aria-label="English">EN</button></div></header>
   <main>
     <section class="intro"><div><div class="eyebrow">01 / CONVOLUTION, ONE STEP AT A TIME</div><h1>하나의 출력이 만들어지는 순간.</h1><p>위치를 고르고, 채널을 곱하고, 더합니다. 내 코드의 여섯 반복문을 눈으로 따라가세요.</p></div><div class="mode-switch" role="group" aria-label="데이터 선택"><button id="toy-mode" class="active" aria-pressed="true">작은 예제로 이해</button><button id="real-mode" aria-pressed="false">내 conv1 데이터</button><button id="random-mode" aria-pressed="false">난수 실험</button></div></section>
     <section id="random-controls" class="random-controls" hidden aria-label="난수 실험 설정"><div><b>같은 seed, 같은 실험.</b><small>입력 0~9 · weight −2~2 · bias −3~3 · C=3 / M=3</small></div><label>Seed <input id="seed" type="number" min="1" max="4294967295" value="4870" aria-label="난수 seed"></label><button id="apply-seed" class="outline">이 seed로 생성</button><button id="shuffle" class="primary">↻ 새 숫자 배정</button><span id="seed-status" aria-live="polite"></span></section>
