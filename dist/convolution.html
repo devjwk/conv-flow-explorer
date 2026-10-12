@@ -38,7 +38,7 @@
 
     <section class="learning-grid"><article class="panel lesson"><span class="eyebrow">READ THE TENSOR</span><h2>필터의 두께와 출력의 두께</h2><div id="tensor-explanation"></div><details><summary>입력 채널을 따로 출력하지 않는 이유</summary><p>필터 하나가 찾는 특징은 모든 입력 채널의 정보를 함께 사용합니다. c별 곱을 하나의 sum에 더하기 때문에 c 차원은 출력에서 사라집니다. 서로 다른 필터 m의 sum은 각각 저장하므로 m 차원은 출력에 남습니다.</p></details></article><article class="panel lesson"><span class="eyebrow">FOLLOW YOUR LABS</span><h2>이 계산이 다음 Lab에서 어떻게 이어질까?</h2><div class="lab-flow"><span>Lab 1<br><b>TF 입력·weight</b></span><i>→</i><span>Lab 2<br><b>직접 누적</b></span><i>→</i><span>Lab 3<br><b>MAC pipeline</b></span><i>→</i><span>Lab 4–5<br><b>정수·HW MAC</b></span></div><p>현재 화면은 Lab 2의 float32 convolution을 재현합니다. 아래 실제 코드 조각으로 정수 계산과 hardware MAC 호출까지 연결해 읽을 수 있습니다.</p></article></section>
     <section class="panel sources"><div class="card-head"><div><span class="eyebrow">PROJECT SOURCE</span><h2>내 저장소의 실제 코드</h2></div></div><div id="source-tabs" class="source-tabs" role="group" aria-label="Lab 코드 선택"></div><div id="source-description"></div><div class="source-path" id="source-path"></div><pre id="source-code"></pre></section>
-    <footer>CPRE 487 LAB FLOW EXPLORER <span>Stride 1 · padding 없음 · batch 1 · Lab 2 코드의 float32 연산 순서</span><a href="../README.md">사용법 / 데이터 출처</a></footer>
+    <footer>CPRE 487 LAB FLOW EXPLORER <span>Stride 1 · padding 없음 · batch 1 · Lab 2 코드의 float32 연산 순서</span><a href="https://github.com/devjwk/conv-flow-explorer#readme">사용법 / 데이터 출처</a></footer>
   </main>
 </body>
 </html>
