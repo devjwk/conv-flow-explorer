@@ -53,6 +53,17 @@ cd conv-flow-explorer
 python3 run.py --offline
 ```
 
+## Lab 2 출력 검사기
+
+자신의 Lab 2 C++ 구현이 이미지 0에 대해 만든 `layer_0_output.bin`부터 `layer_11_output.bin`까지를 한 폴더에 두고 저장소 루트에서 실행합니다.
+
+```bash
+python3 tools/check_outputs.py /path/to/my/image_0_data
+```
+
+도구는 동봉된 Lab 2 이미지 0의 기준 출력과 12개 레이어를 비교해 첫 실패 레이어와 0부터 시작하는 HWC 좌표를 알려줍니다. 기본 허용 오차는 절대 `1e-5`와 상대 `1e-5`입니다. 학생 출력을 생성하거나 수업 점수를 매기지 않습니다. 기준 파일의 출처 커밋과 해시는 [manifest](reference/manifest.json)에 기록했습니다. [학생·운영자 안내](dist/output-check.html)와 `python3 tools/test_check_outputs.py`를 참고하세요.
+
+
 `--offline`은 포함된 데이터로 바로 실행합니다. `python3 run.py`는 공개 Lab 2–5를 복제하여 데이터를 다시 준비합니다. Lab 1은 현재 비공개이며 이 도구의 실행에는 필요하지 않습니다.
 
 ## 한국어 / English

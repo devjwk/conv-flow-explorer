@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lab 2 Output Checker · CPRE 487 Lab Flow Explorer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="home-page">
+  <header class="topbar"><a class="brand" href="index.html">← CPRE 487 LAB FLOW EXPLORER</a><span class="project-label">LAB 2 / OUTPUT CHECK</span></header>
+  <main class="home-main">
+    <section class="home-hero"><div class="home-hero-copy">
+      <span class="eyebrow">STUDENT & INSTRUCTOR GUIDE</span>
+      <h1>내 구현의 첫 오류 레이어 찾기</h1>
+      <p>Lab 2에서 만든 12개 레이어 출력을 이미지 0의 기준값과 비교합니다. 이 검사는 컴퓨터의 Python 명령으로 실행하며 파일을 웹사이트에 업로드하지 않습니다.</p>
+      <p><a href="#english">English guide ↓</a></p>
+    </div></section>
+    <section class="home-guide"><div>
+      <h2>학생용 절차</h2>
+      <ol>
+        <li>자신의 Lab 2 C++ 구현에서 이미지 0의 출력을 <code>layer_0_output.bin</code>부터 <code>layer_11_output.bin</code>까지 한 폴더에 저장합니다.</li>
+        <li>저장소 루트에서 <code>python3 tools/check_outputs.py /path/to/my/image_0_data</code>를 실행합니다.</li>
+        <li>처음 FAIL이 나온 레이어와 좌표를 확인합니다. 뒤 레이어의 실패는 앞 레이어 오류가 전파된 결과일 수 있습니다.</li>
+        <li>Conv 1, Pool 1, Flatten, Dense 1, Softmax라면 이 사이트에서 해당 계산 과정을 살펴봅니다.</li>
+      </ol>
+    </div></section>
+    <section class="home-guide"><div>
+      <h2>형식과 결과</h2>
+      <p>파일은 little-endian float32입니다. 공간 레이어는 HWC 순서이며 출력 좌표는 0부터 시작합니다. 각 원소는 <code>|expected − actual| ≤ 1e-5 + 1e-5 × |expected|</code>이면 통과합니다. <code>--atol</code>과 <code>--rtol</code>로 허용 오차를 바꿀 수 있습니다.</p>
+      <p>누락 파일, 잘못된 파일 크기, NaN/Infinity도 보고합니다. 다른 이미지의 기준 출력을 사용할 때는 <code>--reference /path/to/reference/image_N_data</code>를 지정하고 같은 이미지끼리 비교하세요. <code>--json</code>은 기계 판독 결과를 출력합니다. 종료 코드 0은 전부 통과, 1은 차이 또는 누락, 2는 입력 오류입니다.</p>
+    </div></section>
+    <section class="home-guide"><div>
+      <h2>수업 운영자 확인</h2>
+      <p><code>python3 tools/check_outputs.py reference/image_0_data</code>는 12개 모두 PASS여야 합니다. <code>python3 tools/test_check_outputs.py</code>는 오류 주입 후 첫 실패 좌표와 입력 오류를 확인합니다. 출처 커밋과 파일 해시는 <a href="https://github.com/devjwk/conv-flow-explorer/blob/main/reference/manifest.json">reference/manifest.json</a>에 기록했습니다. 도구는 학생 출력을 생성하거나 점수를 매기지 않습니다.</p>
+    </div></section>
+    <section class="home-guide" id="english" lang="en"><div>
+      <h2>Find your first incorrect layer</h2>
+      <p>Save your own Lab 2 C++ outputs for image 0 as <code>layer_0_output.bin</code> through <code>layer_11_output.bin</code> in one directory. From the repository root, run <code>python3 tools/check_outputs.py /path/to/my/image_0_data</code>. The checker compares all 12 layers with bundled reference outputs and reports the first failing layer, zero-based coordinate, expected value, and actual value.</p>
+      <p>Files must contain little-endian float32 values; spatial tensors use HWC order. An element passes when <code>|expected − actual| ≤ 1e-5 + 1e-5 × |expected|</code>. Use <code>--atol</code> and <code>--rtol</code> to change the tolerances, <code>--json</code> for machine-readable output, or <code>--reference /path/to/reference/image_N_data</code> for another matching reference image. Exit codes are 0 for all pass, 1 for a mismatch or missing file, and 2 for an input error.</p>
+      <p>Instructors can run <code>python3 tools/check_outputs.py reference/image_0_data</code> to check the bundled baseline and <code>python3 tools/test_check_outputs.py</code> to exercise an injected error. This local command-line tool does not upload files or assign grades.</p>
+    </div></section>
+  </main>
+</body>
+</html>

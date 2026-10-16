@@ -1,0 +1,56 @@
+{
+  "sourceRepository": "https://github.com/devjwk/cpre487lab2",
+  "sourceCommit": "38761dd4c51cc981b6bbe8895551a68e90dfad99",
+  "sourcePath": "data/image_0_data",
+  "format": "little-endian float32; HWC for spatial layers",
+  "files": {
+    "layer_0_output.bin": {
+      "bytes": 460800,
+      "sha256": "d2411ca2f64ebd1c0302f72495ea586ecc788882e489bd9234d845082d24bdf5"
+    },
+    "layer_10_output.bin": {
+      "bytes": 1024,
+      "sha256": "9a35880e6cd93b705a0c429a722e9b610f7c264f779c096bf00df130b461ea86"
+    },
+    "layer_11_output.bin": {
+      "bytes": 800,
+      "sha256": "f9de277b1b2b9374a424fae9d51f75e6b915dea46128345219818386732fc425"
+    },
+    "layer_1_output.bin": {
+      "bytes": 401408,
+      "sha256": "f7f752c914bea1cdb777041d52ece3b104585d1e4d830f72027d297d633ae581"
+    },
+    "layer_2_output.bin": {
+      "bytes": 100352,
+      "sha256": "fc7df41d4630dd58bb2d30722870121b278d51e4472e1c420e82cb69a786886f"
+    },
+    "layer_3_output.bin": {
+      "bytes": 173056,
+      "sha256": "141fe84250f98129239929508ed45f9982c453335fa93dabfa1fdfd2c011e29e"
+    },
+    "layer_4_output.bin": {
+      "bytes": 147456,
+      "sha256": "3241e2c5a5f822d804a0a4d2bf703ccab6b3d0d0125f213cd8205276775b4f48"
+    },
+    "layer_5_output.bin": {
+      "bytes": 36864,
+      "sha256": "71ada5159bffe45ebcee5ac3ed42df43f04af6aa432ca907c8a6c9af86468fd9"
+    },
+    "layer_6_output.bin": {
+      "bytes": 25600,
+      "sha256": "048f5f0fd7ac513388825bb67050964be2e254fdb83f901b071e849065df3fe5"
+    },
+    "layer_7_output.bin": {
+      "bytes": 32768,
+      "sha256": "64f7cdba3e4995c5ca51884b25788238c637c05b3b974ed7c0520f4910510e8c"
+    },
+    "layer_8_output.bin": {
+      "bytes": 8192,
+      "sha256": "39196433a0aa49fb638539f687224eb331bd6518df8cbbd2c91a7463d315c59d"
+    },
+    "layer_9_output.bin": {
+      "bytes": 8192,
+      "sha256": "39196433a0aa49fb638539f687224eb331bd6518df8cbbd2c91a7463d315c59d"
+    }
+  }
+}

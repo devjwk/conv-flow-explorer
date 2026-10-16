@@ -24,6 +24,17 @@ python3 run.py --offline
 
 Requires **Python 3.9+**. On Windows, use `py -3 run.py` if needed. The command picks a random seed and opens a local browser at port 8787. Stop the server with **Ctrl+C**. No Python packages, Node.js, or C++ compiler are needed for this mode.
 
+### Lab 2 output checker
+
+This repository also includes a reusable checker for a student's **own** Lab 2 C++ output dumps. Put `layer_0_output.bin` through `layer_11_output.bin` for image 0 in one directory, then run:
+
+```bash
+python3 tools/check_outputs.py /path/to/my/image_0_data
+```
+
+It compares all 12 little-endian float32 arrays with the bundled Lab 2 reference, reports the first failing layer and zero-based HWC coordinate, and continues to summarize later layers. The default tolerance is `1e-5` absolute plus `1e-5` relative. The checker does not generate student outputs or assign a course grade. See the [student and instructor guide](dist/output-check.html) for format, interpretation, and other reference directories. Verify the tool with `python3 tools/test_check_outputs.py`.
+
+
 To clone the public lab repositories and rebuild the included data:
 
 ```bash
@@ -84,6 +95,8 @@ The static home page can also be opened directly from `dist/index.html`; the con
 | [Lab 4](https://github.com/devjwk/cpre487lab4) | Original integer convolution excerpt |
 | [Lab 5](https://github.com/devjwk/cpre487lab5) | Original input patch sharing and `macGroup` call excerpt |
 
+The output checker also bundles all 12 reference outputs for image 0. [Its manifest](reference/manifest.json) records the Lab 2 source commit and each file's SHA-256.
+
 Bundled data comes from Lab 2: `data/image_0.bin`, `data/model/conv1_weights.bin`, `data/model/conv1_biases.bin`, and `data/image_0_data/layer_0_output.bin`. Byte counts and SHA-256 hashes are recorded in [the data manifest](validation/data-manifest.json).
 
 Input layout is **HWC**, weights **RSCM**, output **PQM**. Stride 1, no padding, batch 1. Source excerpts retain their original text and line numbers. Lab checkouts, machine binaries, and local setup records are excluded from Git.
@@ -119,7 +132,8 @@ The general teaching goal is to make neural-network layer flow understandable th
 ```text
 dist/          Home and five static layer pages, translations, computation, embedded data
 run.py         Standard-library launcher and optional lab preparation
-tools/         Data exporter, original C++ wrapper, numerical checks, ZIP packager
+tools/         Data exporter, original C++ wrapper, numerical checks, output checker, ZIP packager
+reference/     Image 0 reference outputs and provenance manifest
 validation/    Recorded numerical checks and source data manifest
 docs/          Interface preview
 ```
